@@ -14,7 +14,7 @@ When the script is run it looks for your configuration file at ~/etc/wmup/config
 ---
 
 example ~/etc/wmup/config.json
-```
+```json
 {
     "auth": {
         "site": "http://your_wordpress_site.org/xmlrpc.php",
@@ -45,7 +45,7 @@ example ~/etc/wmup/config.json
             "@term_2": "Custom post_type's terms",
             "@term_5": "http://codex.wordpress.org/Taxonomies",
               
-            "!comment": "Json values with an exclamation mark in front are ignored"
+            "!comment": "Json values with an exclamation mark in front are ignored",
             "!term_6": "Useful for commenting out a term since json is lacking comments"
         }
     ]
