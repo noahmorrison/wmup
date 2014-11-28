@@ -10,7 +10,7 @@ from upload import uploadPost
 
 
 def run_command(cmd, context):
-    script_bin = os.path.expanduser('~/etc/wmup/scripts/')
+    script_bin = os.path.expanduser('~/.config/wmup/scripts/')
     args = shlex.split(cmd)
     args[0] = script_bin + args[0]
 
@@ -87,7 +87,7 @@ def parse_item(item):
     return (data, terms)
 
 if __name__ == '__main__':
-    config_file = os.path.expanduser('~/etc/wmup/config.json')
+    config_file = os.path.expanduser('~/.config/wmup/config.json')
     config = json.load(open(config_file, 'r'))
 
     for item in config['items']:
