@@ -6,9 +6,8 @@ Wordpress Multi-media UPloader (wmup) is a python program that can upload custom
 
 ### Usage ###
 ---
-When the script is run it looks for your configuration file at ~/etc/wmup/config.json
+When the script is run it looks for your configuration file at ~/.config/wmup/config.json
 
-(that should probably be ~/.config/wmup/config.json)
 
 ### Configuration ###
 ---
@@ -40,11 +39,11 @@ example ~/etc/wmup/config.json
             "zone": -5,
 
             "content": "{@term_5}",
-              
+
             "@term_1": "These are your",
             "@term_2": "Custom post_type's terms",
             "@term_5": "http://codex.wordpress.org/Taxonomies",
-              
+
             "!comment": "Json values with an exclamation mark in front are ignored",
             "!term_6": "Useful for commenting out a term since json is lacking comments"
         }
@@ -57,3 +56,10 @@ You can use these to convert files to the right format and clean up after your'r
 
 Scripts that you want to run must currently live in ~/etc/wmup/scripts/ 
 but they can call anything from there.
+
+
+### TODO ###
+---
+
+* let scripts set variables
+* print scripts output nicer (something like "echo: hey")
