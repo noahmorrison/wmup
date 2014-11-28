@@ -53,12 +53,12 @@ def parse_item(item):
         elif key.startswith('!'):
             pass  # Comment
 
-        elif key is 'before':
+        elif key == 'before':
             if type(value) is str:
                 value = [value]
             data['before'] = value
 
-        elif key is 'after':
+        elif key == 'after':
             if type(value) is str:
                 value = [value]
             data['after'] = value
