@@ -6,7 +6,7 @@ import shlex
 from subprocess import Popen, PIPE
 from sys import argv
 
-from upload import uploadPost
+from upload import upload_post
 
 
 def run_command(cmd, context):
@@ -101,6 +101,6 @@ if __name__ == '__main__':
         run_commands(data['before'], ctx)
 
         if data['upload']:
-            uploadPost(config['auth'], **args)
+            upload_post(config['auth'], **args)
 
         run_commands(data['after'], ctx)

@@ -15,7 +15,7 @@ def gen_datetime(date, style=None, zone=0):
     return t + d
 
 
-def uploadMedia(path, wp):
+def upload_media(path, wp):
     mp3 = open(path, 'rb')
     data = {'name': path.split('/')[-1],
             'type': 'audio/mpeg',
@@ -27,7 +27,7 @@ def uploadMedia(path, wp):
     return url+'\n'+size+'\n'+'audio/mpeg'
 
 
-def uploadPost(auth, **args):
+def upload_post(auth, **args):
     wp = Client(auth['site'], auth['user'], auth['pass'])
 
     post = WordPressPost()
@@ -38,12 +38,12 @@ def uploadPost(auth, **args):
     post.date = gen_datetime(args['date'], args.get('date-format', None),
                              args.get('zone', 0))
 
-    terms = { key: [value] for key, value in args.get('terms', {}).items() }
+    terms = {key: [value] for key, value in args.get('terms', {}).items()}
     post.terms_names = terms
 
     if args.get('path', None) is not None:
         post.custom_fields = [{'key': 'enclosure',
-                               'value': uploadMedia(args['path'], wp)
+                               'value': upload_media(args['path'], wp)
                                }]
 
     if args.get('publish', False):
