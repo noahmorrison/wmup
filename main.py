@@ -100,6 +100,7 @@ if __name__ == '__main__':
 
         run_commands(data['before'], ctx)
 
-        uploadPost(config['auth'], **args)
+        if data['upload']:
+            uploadPost(config['auth'], **args)
 
         run_commands(data['after'], ctx)
