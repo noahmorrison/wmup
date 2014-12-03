@@ -38,7 +38,8 @@ def uploadPost(auth, **args):
     post.date = gen_datetime(args['date'], args.get('date-format', None),
                              args.get('zone', 0))
 
-    post.term_names = args.get('terms', None)
+    terms = { key: [value] for key, value in args.get('terms', {}).items() }
+    post.terms_names = terms
 
     if args.get('path', None) is not None:
         post.custom_fields = [{'key': 'enclosure',
