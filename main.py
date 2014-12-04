@@ -46,7 +46,12 @@ def run_commands(cmds, context):
         if '../' in cmd:
             raise SyntaxError('"../" is not allowed in commands')
 
-        run_command(cmd, context)
+        if type(cmd) == list:
+            var_name, cmd = cmd
+            context[var_name] = run_command(cmd, context, True)
+
+        else:
+            run_command(cmd, context)
 
 
 def parse_item(item):
