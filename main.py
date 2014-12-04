@@ -9,9 +9,11 @@ from sys import argv
 from upload import upload_post
 
 
-def run_command(cmd, context):
+def run_command(cmd, context, silent=False):
+    output = ''
     script_bin = os.path.expanduser('~/.config/wmup/scripts/')
     args = shlex.split(cmd)
+    cmd_name = args[0]
     args[0] = script_bin + args[0]
 
     for i, arg in enumerate(args[1:]):
@@ -20,11 +22,23 @@ def run_command(cmd, context):
         except KeyError:
             args[i + 1] = ''
 
-    proc = Popen(args)
+    proc = Popen(args, stdout=PIPE)
+
+    for line in proc.stdout.readlines():
+        line = line.rstrip()
+        if silent:
+            output += line.decode('utf-8')
+        else:
+            print('{}: {}'.format(cmd_name, line.decode('utf-8')))
+
     code = proc.wait()
 
+
     if code:
-        print('{}: exited with code: {}'.format(args[0], code))
+        print('wmup: {} exited with code {}'.format(cmd_name, code))
+
+    if silent:
+        return output
 
 
 def run_commands(cmds, context):
@@ -32,7 +46,6 @@ def run_commands(cmds, context):
         if '../' in cmd:
             raise SyntaxError('"../" is not allowed in commands')
 
-        print('Starting command: {}'.format(cmd))
         run_command(cmd, context)
 
 
