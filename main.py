@@ -104,8 +104,11 @@ def parse_item(item):
 
     return (data, terms)
 
-if __name__ == '__main__':
-    config_file = os.path.expanduser('~/.config/wmup/config.json')
+
+def main(**kwargs):
+    def_config = '~/.config/wmup/config.json'
+    config_file = os.path.expanduser(kwargs.get('config_file', def_config))
+
     config = json.load(open(config_file, 'r'))
 
     for item in config['items']:
@@ -122,3 +125,28 @@ if __name__ == '__main__':
             upload_post(config['auth'], **args)
 
         run_commands(data['after'], ctx)
+
+
+def cli_main():
+    import argparse
+
+    def is_file(arg):
+        path = os.path.expanduser(arg)
+        if not os.path.isfile(path):
+            parser.error('The file {0} does not exist!'.format(path))
+        else:
+            return path
+
+
+    parser = argparse.ArgumentParser(description=__doc__)
+
+    parser.add_argument('-c', '--config', dest='config_file',
+                        help='The configuration file',
+                        type=is_file, default='~/.config/wmup/config.json')
+
+    args = vars(parser.parse_args())
+
+    main(**args)
+
+if __name__ == '__main__':
+    cli_main()
